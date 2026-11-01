@@ -68,7 +68,6 @@ src/components/mockups/<slug>/icons.tsx  its icons, named for what they do here
 src/lib/mockups/<slug>-data.ts           its mock data
 src/components/ui/                       50 shadcn primitives — GENERATED, do not edit
 src/components/shell/                    the chrome screens sit in: mockup-shell, app-shell and their icons
-src/components/shell/page-transition.tsx the curtain between screens — mounted once, in the root layout
 src/components/shared/                   building blocks more than one area uses: icon.tsx, data-table.tsx
 src/components/site/                     the landing index's own pieces: registry menu, onboarding, dock
 src/lib/site/mockups-data.ts             the landing index registry
@@ -101,16 +100,6 @@ one topic — every one of them prerendered, so any topic can be sent to someone
 on its own. The tree lives in `DOCS_SECTIONS`; add a page there and give its id
 a view in the route file, and the URL, the rail entry and the static path all
 follow. A topic with no view falls back to its section's index.
-
-**Every click between screens plays the curtain.** `page-transition.tsx`
-wraps every route once, from the root layout: a click on an internal link
-raises a curtain that names where the reader is going, pushes the route under
-it, and lifts it off the top with the new page rising into place. It skips
-browsing inside one section (topic to topic in the design system), anything a
-link opts out of with `data-no-transition`, modified and external clicks, the
-browser's own back and forward, and every navigation under reduced motion.
-Direct loads never see it, so `npm run shots` and the reel renderer capture the
-page alone.
 
 **No scrollbar, anywhere.** `globals.css` hides every bar — the page's, every
 `overflow-auto` panel's, and the ScrollArea primitive's — and everything still
@@ -508,6 +497,18 @@ starts at each route in `src/lib/site/mockups-data.ts`, follows every local impo
 and writes whatever it reaches. Hand-maintained file lists go stale the moment
 someone adds an import, and the failure is silent — the consumer installs a
 screen that does not compile.
+
+**The design system ships through the registry too**, because `/r/*` is the only
+public path on the site — anyone who cannot sign in reaches the system here or
+not at all. `src/lib/design-system/registry-items.ts` says what goes out:
+
+- `design-system` — the whole system as one markdown file (`DESIGN_SYSTEM_MD`,
+  generated from the docs data), written to `registry/design-system/SKILL.md`
+  and installed as a Claude skill at `.claude/skills/sarj-design-system/SKILL.md`.
+- `ds-<topic>` — one block per Components topic, built from the file that renders
+  its demo (`COMPONENT_ENTRIES`). Add a Components topic, add its entry there.
+
+The markdown links only into `/r/*`, never to a docs page, which Access blocks.
 
 - `src/components/ui/*` is never copied; it becomes `registryDependencies`.
 - npm packages become `dependencies`.

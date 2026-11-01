@@ -94,9 +94,8 @@ export function HeyClick() {
           setRun((count) => count + 1)
           setManual(true)
         }}
+        className="raised-button"
         ref={trigger}
-        size="sm"
-        variant="ghost"
       >
         <PointerIcon />
         Hey, show me around

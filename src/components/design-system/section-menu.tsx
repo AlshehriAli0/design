@@ -136,20 +136,12 @@ export function SectionMenu({
     return () => window.removeEventListener("popstate", sync)
   }, [])
 
+  /* The overview is its own page now (OverviewTour), so stepping out of a topic goes back to it, at that topic's section. */
   const closeTo = (target: 0 | 1) => {
-    if (target >= base) {
-      window.history.go(target - depth.current)
-      return
-    }
     const sectionId = open?.id
-    window.history.replaceState(
-      null,
-      "",
-      target === 1 && sectionId ? sectionHref(sectionId) : DOCS_ROOT,
+    window.location.assign(
+      target === 1 && sectionId ? `${DOCS_ROOT}#${sectionId}` : DOCS_ROOT,
     )
-    depth.current = target
-    setTopic(null)
-    if (target === 0) setOpen(null)
   }
   const closeTopic = () => closeTo(1)
   const closeSection = () => closeTo(0)

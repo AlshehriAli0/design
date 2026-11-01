@@ -1,6 +1,6 @@
 // Not window.location.origin: the copied command runs in another repo, where localhost installs nothing.
 
-const REGISTRY_ORIGIN =
+export const REGISTRY_ORIGIN =
   process.env.NEXT_PUBLIC_REGISTRY_ORIGIN ?? "https://design.sarj.ai"
 
 export const DEFAULT_CWD = "products/platform/apps/web"

@@ -1,19 +1,12 @@
 "use client"
 
+import type * as React from "react"
 import { useMemo, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
 
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardAction,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import {
   Select,
   SelectContent,
@@ -23,9 +16,11 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { OpenIcon } from "@/components/shell/workspace-icons"
+import { SiteFooter } from "@/components/shell/site-footer"
 import { SiteNav } from "@/components/shell/site-nav"
 import { HeyClick } from "@/components/site/hey-click"
 import { LinkMenu } from "@/components/site/link-menu"
+import { OrderRail } from "@/components/site/order-rail"
 import { RegistryMenu } from "@/components/site/registry-menu"
 import { SurfaceDock } from "@/components/site/surface-dock"
 import {
@@ -65,8 +60,11 @@ export default function Home() {
     <>
       <SiteNav actions={<HeyClick />} />
 
-      <main className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-8 pb-8">
-        <div className="flex justify-end">
+      <main className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-8 pt-8 pb-8">
+        <OrderRail onOrderChange={setOrder} order={order} sections={sections} />
+
+        {/* Narrow screens have no gutter for the rail. */}
+        <div className="flex justify-end xl:hidden">
           <Select
             onValueChange={(next) => setOrder(next as Order)}
             value={order}
@@ -98,7 +96,8 @@ export default function Home() {
               </div>
             ) : null}
 
-            <div className="grid gap-6 md:grid-cols-2">
+            {/* Keyed on the order so a re-sort replays the cards' entrance. */}
+            <div className="grid gap-6 md:grid-cols-2" key={order}>
               {mockups.map((mockup, card) => {
                 const { href, title, meta, icon, tickets } = mockup
                 const slug = href.slice(1)
@@ -106,77 +105,91 @@ export default function Home() {
                 const tour = group === 0 && card === 0 ? "install" : undefined
 
                 return (
-                  <Card className="relative" key={href}>
-                    {/* Unoptimized: `npm run thumbs` already wrote a 2x WebP. The fingerprint is the cache key, since redeploys reuse a filename. */}
-                    {slug in thumbnails.fingerprints ? (
-                      <Image
-                        alt=""
-                        className="border-b"
-                        height={thumbnails.height}
-                        src={`/thumbs/${slug}.webp?v=${
-                          thumbnails.fingerprints[
-                            slug as keyof typeof thumbnails.fingerprints
-                          ]
-                        }`}
-                        unoptimized
-                        width={thumbnails.width}
-                      />
-                    ) : null}
-
-                    {/* An overlay, not a wrapping link: Card drops its top padding via `has-[>img:first-child]`, which an anchor in between would break. */}
-                    {slug in thumbnails.fingerprints ? (
-                      <Link
-                        aria-hidden="true"
-                        className="absolute inset-x-0 top-0 rounded-t-xl transition-colors duration-150 ease-out-cubic hover:bg-foreground/5 motion-reduce:transition-none"
-                        href={href}
-                        style={{
-                          aspectRatio: `${thumbnails.width} / ${thumbnails.height}`,
-                        }}
-                        tabIndex={-1}
-                      />
-                    ) : null}
-
-                    <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-tint text-primary-tint-foreground">
-                          <HugeiconsIcon
-                            icon={icon}
-                            strokeWidth={1.8}
-                            className="size-4"
-                          />
-                        </span>
-                        <div className="flex flex-col gap-0.5">
-                          <CardTitle>{title}</CardTitle>
-                          <CardDescription>
-                            {meta} · {addedLabel(mockup)}
-                          </CardDescription>
-                        </div>
+                  <article
+                    className="site-window window-enter flex flex-col"
+                    key={href}
+                    style={{ "--i": card } as React.CSSProperties}
+                  >
+                    {/* The window bar: three dots, the address, and the card's menus. */}
+                    <div className="flex items-center gap-3 px-3 pt-1 pb-2">
+                      <div
+                        aria-hidden
+                        className="window-dots flex w-16 gap-1.5"
+                      >
+                        <span className="size-2.5 rounded-full bg-destructive/70" />
+                        <span className="size-2.5 rounded-full bg-warning/70" />
+                        <span className="size-2.5 rounded-full bg-success/70" />
                       </div>
-
-                      <CardAction className="flex items-center gap-1">
+                      <span className="window-url flex-1 truncate text-center text-xs text-muted-foreground">
+                        design.sarj.ai/{slug}
+                      </span>
+                      <div className="flex w-16 justify-end">
                         <LinkMenu slug={slug} tickets={tickets} title={title} />
                         <RegistryMenu slug={slug} title={title} tour={tour} />
-                      </CardAction>
-                    </CardHeader>
-                    <CardFooter className="mt-auto">
-                      <Button variant="outline" size="sm" asChild>
+                      </div>
+                    </div>
+
+                    {/* The page inside the window, fading out toward the caption. */}
+                    <Link
+                      aria-hidden="true"
+                      className="window-fade block overflow-hidden rounded-2xl bg-background"
+                      href={href}
+                      style={{
+                        aspectRatio: `${thumbnails.width} / ${thumbnails.height}`,
+                      }}
+                      tabIndex={-1}
+                    >
+                      {/* Unoptimized: `npm run thumbs` already wrote a 2x WebP. The fingerprint is the cache key, since redeploys reuse a filename. */}
+                      {slug in thumbnails.fingerprints ? (
+                        <Image
+                          alt=""
+                          height={thumbnails.height}
+                          src={`/thumbs/${slug}.webp?v=${
+                            thumbnails.fingerprints[
+                              slug as keyof typeof thumbnails.fingerprints
+                            ]
+                          }`}
+                          unoptimized
+                          width={thumbnails.width}
+                        />
+                      ) : null}
+                    </Link>
+
+                    <div className="-mt-10 flex flex-1 flex-col items-center gap-1 px-6 pb-6 text-center">
+                      <span className="site-window-badge relative mb-3 flex size-12 items-center justify-center rounded-full bg-background text-primary">
+                        <HugeiconsIcon
+                          icon={icon}
+                          strokeWidth={1.8}
+                          className="size-5"
+                        />
+                      </span>
+                      <h3 className="text-base font-semibold">{title}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {meta} · {addedLabel(mockup)}
+                      </p>
+                      <Button className="raised-button mt-4" asChild>
                         <Link href={href}>
                           Open mockup
                           <OpenIcon className="rtl:rotate-180" />
                         </Link>
                       </Button>
-                    </CardFooter>
-                  </Card>
+                    </div>
+                  </article>
                 )
               })}
             </div>
           </section>
         ))}
 
+        {/* Wide screens list the sections in the order rail instead. */}
         {grouped && sections.length > 1 ? (
-          <SurfaceDock sections={sections} />
+          <div className="xl:hidden">
+            <SurfaceDock sections={sections} />
+          </div>
         ) : null}
       </main>
+
+      <SiteFooter />
     </>
   )
 }

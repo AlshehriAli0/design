@@ -18,6 +18,7 @@ import { CreationFlowPreview } from "@/components/design-system/creation-flow-pr
 import { JsonViewPreview } from "@/components/design-system/json-view-preview"
 import { AlertPreview } from "@/components/design-system/alert-preview"
 import { RecordingPreview } from "@/components/design-system/recording-preview"
+import { AgentStatePreview } from "@/components/design-system/agent-state-preview"
 import { IntegrationCardPreview } from "@/components/design-system/integration-card-preview"
 import { DevelopersPage } from "@/components/mockups/developers/developers-page"
 import { DrawerAnatomyPreview } from "@/components/design-system/drawer-anatomy-preview"
@@ -235,6 +236,7 @@ export default async function DesignSystemPage({
         "json-view": <JsonViewPreview />,
         alert: <AlertPreview />,
         recording: <RecordingPreview />,
+        "agent-states": <AgentStatePreview />,
         "unsaved-changes": <SaveBarPreview />,
         "integration-card": <IntegrationCardPreview />,
         developers: (

@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils"
 
 /* `COLLAPSED` matches `InputGroup`'s `h-8`. Width is animated on purpose:
    scaleX would stretch the corner radius over a ~7x growth. */
-const COLLAPSED = 32
+const COLLAPSED = 36
 const EXPANDED = 268
 
 const MAX_RESULTS = 7
@@ -131,11 +131,11 @@ export function NavSearch() {
   }
 
   return (
-    <div className="relative shrink-0" ref={rootRef}>
-      {/* `clip`, not `hidden`: `overflow: hidden` makes a scroll container, and focusing the input would scroll it out of line. */}
+    <div className="relative size-9 shrink-0" ref={rootRef}>
+      {/* Holds a 36px slot in the nav and opens over it, growing leftward from the end, so nothing beside it is pushed or wraps. `clip`, not `hidden`: `overflow: hidden` makes a scroll container, and focusing the input would scroll it out of line. */}
       <motion.div
         animate={{ width: open ? EXPANDED : COLLAPSED }}
-        className="overflow-clip"
+        className="nav-search-float absolute end-0 top-0 z-raised overflow-clip bg-background"
         initial={false}
         transition={
           reduced
@@ -144,7 +144,7 @@ export function NavSearch() {
         }
       >
         {/* No focus ring: the pill around it already draws one. */}
-        <InputGroup className="has-[[data-slot=input-group-control]:focus-visible]:border-input has-[[data-slot=input-group-control]:focus-visible]:ring-0">
+        <InputGroup className="nav-search-field has-[[data-slot=input-group-control]:focus-visible]:border-input has-[[data-slot=input-group-control]:focus-visible]:ring-0">
           <InputGroupAddon>
             <InputGroupButton
               aria-expanded={open}

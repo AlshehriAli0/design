@@ -4,6 +4,1592 @@
   "homepage": "https://design.sarj.ai",
   "items": [
     {
+      "name": "design-system",
+      "type": "registry:item",
+      "title": "Sarj design system",
+      "description": "The whole Sarj design system as one markdown file — tokens, layers, motion, patterns, surfaces, components and the lint rules — installed as a Claude skill.",
+      "files": [
+        {
+          "path": "registry/design-system/SKILL.md",
+          "type": "registry:file",
+          "target": "~/.claude/skills/sarj-design-system/SKILL.md"
+        }
+      ]
+    },
+    {
+      "name": "ds-colour",
+      "type": "registry:block",
+      "title": "Colour",
+      "description": "The 44 tokens a screen is built from, and what each one is for.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "table"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/colour-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/colour-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/lib/design-system/colour-tokens.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/design-system/colour-tokens.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-warning": "var(--warning)",
+          "color-warning-foreground": "var(--warning-foreground)",
+          "color-success": "var(--success)",
+          "color-success-foreground": "var(--success-foreground)",
+          "color-primary-tint": "var(--primary-tint)",
+          "color-primary-tint-foreground": "var(--primary-tint-foreground)",
+          "color-success-tint": "var(--success-tint)",
+          "color-success-tint-foreground": "var(--success-tint-foreground)",
+          "color-warning-tint": "var(--warning-tint)",
+          "color-warning-tint-foreground": "var(--warning-tint-foreground)",
+          "color-destructive-tint": "var(--destructive-tint)",
+          "color-destructive-tint-foreground": "var(--destructive-tint-foreground)",
+          "color-info": "var(--info)",
+          "color-info-foreground": "var(--info-foreground)",
+          "color-info-tint": "var(--info-tint)",
+          "color-info-tint-foreground": "var(--info-tint-foreground)",
+          "color-chart-6": "var(--chart-6)"
+        },
+        "light": {
+          "warning": "oklch(0.769 0.188 70.08)",
+          "warning-foreground": "oklch(0.28 0.07 55)",
+          "success": "oklch(0.627 0.17 149.2)",
+          "success-foreground": "oklch(0.985 0 0)",
+          "primary-tint": "oklch(0.948 0.019 291.8)",
+          "primary-tint-foreground": "oklch(0.411 0.108 291.8)",
+          "success-tint": "oklch(0.945 0.045 149.2)",
+          "success-tint-foreground": "oklch(0.402 0.098 149.2)",
+          "warning-tint": "oklch(0.955 0.055 70.08)",
+          "warning-tint-foreground": "oklch(0.402 0.086 55)",
+          "destructive-tint": "oklch(0.948 0.028 27.325)",
+          "destructive-tint-foreground": "oklch(0.442 0.176 27.325)",
+          "info": "oklch(0.54 0.15 250)",
+          "info-foreground": "oklch(0.985 0 0)",
+          "info-tint": "oklch(0.948 0.03 250)",
+          "info-tint-foreground": "oklch(0.43 0.11 250)"
+        }
+      },
+      "css": {
+        ":root": {
+          "--chart-6": "oklch(0.66 0.18 300)"
+        }
+      }
+    },
+    {
+      "name": "ds-index",
+      "type": "registry:block",
+      "title": "Index page",
+      "description": "A collection of one kind of object, and the four states it can be in instead of full.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "react-day-picker",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "button-group",
+        "calendar",
+        "card",
+        "command",
+        "dropdown-menu",
+        "empty",
+        "field",
+        "input-group",
+        "item",
+        "popover",
+        "select",
+        "separator",
+        "skeleton",
+        "spinner",
+        "table",
+        "tabs",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/call-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/call-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/error-state.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/error-state.tsx"
+        },
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/design-system/index-page-demo.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/index-page-demo.tsx"
+        },
+        {
+          "path": "src/components/design-system/knowledge-index-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/knowledge-index-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/page-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/page-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/scenario-index-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/scenario-index-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/state-previews.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/state-previews.tsx"
+        },
+        {
+          "path": "src/components/design-system/tabs-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/tabs-preview.tsx"
+        },
+        {
+          "path": "src/components/shared/data-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/data-table.tsx"
+        },
+        {
+          "path": "src/components/shared/filter-bar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/filter-bar.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/list-footer.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/list-footer.tsx"
+        },
+        {
+          "path": "src/components/shared/page-header.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/page-header.tsx"
+        },
+        {
+          "path": "src/lib/design-system/data.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/design-system/data.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-warning": "var(--warning)",
+          "color-success": "var(--success)",
+          "color-primary-tint": "var(--primary-tint)",
+          "color-primary-tint-foreground": "var(--primary-tint-foreground)",
+          "color-success-tint": "var(--success-tint)",
+          "color-success-tint-foreground": "var(--success-tint-foreground)",
+          "color-warning-tint": "var(--warning-tint)",
+          "color-warning-tint-foreground": "var(--warning-tint-foreground)",
+          "color-destructive-tint": "var(--destructive-tint)",
+          "color-destructive-tint-foreground": "var(--destructive-tint-foreground)"
+        },
+        "light": {
+          "warning": "oklch(0.769 0.188 70.08)",
+          "success": "oklch(0.627 0.17 149.2)",
+          "primary-tint": "oklch(0.948 0.019 291.8)",
+          "primary-tint-foreground": "oklch(0.411 0.108 291.8)",
+          "success-tint": "oklch(0.945 0.045 149.2)",
+          "success-tint-foreground": "oklch(0.402 0.098 149.2)",
+          "warning-tint": "oklch(0.955 0.055 70.08)",
+          "warning-tint-foreground": "oklch(0.402 0.086 55)",
+          "destructive-tint": "oklch(0.948 0.028 27.325)",
+          "destructive-tint-foreground": "oklch(0.442 0.176 27.325)"
+        }
+      },
+      "css": {
+        "@utility z-base": {
+          "z-index": "var(--z-base)"
+        },
+        "@utility z-raised": {
+          "z-index": "var(--z-raised)"
+        },
+        "@utility z-sticky": {
+          "z-index": "var(--z-sticky)"
+        },
+        "@utility z-nav": {
+          "z-index": "var(--z-nav)"
+        },
+        "@utility z-overlay": {
+          "z-index": "var(--z-overlay)"
+        },
+        "@utility z-modal": {
+          "z-index": "var(--z-modal)"
+        },
+        "@utility z-popover": {
+          "z-index": "var(--z-popover)"
+        },
+        "@utility z-toast": {
+          "z-index": "var(--z-toast)"
+        },
+        "@utility z-tooltip": {
+          "z-index": "var(--z-tooltip)"
+        },
+        ":root": {
+          "--z-base": "0",
+          "--z-raised": "10",
+          "--z-sticky": "20",
+          "--z-nav": "30",
+          "--z-overlay": "40",
+          "--z-modal": "50",
+          "--z-popover": "60",
+          "--z-toast": "70",
+          "--z-tooltip": "80"
+        }
+      }
+    },
+    {
+      "name": "ds-surfaces",
+      "type": "registry:block",
+      "title": "Choosing a surface",
+      "description": "Where a task goes — in the page, over it, beside it, or instead of it — decided by what the reader is doing and how much there is. Dry-run against every overlay in the platform.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "motion",
+        "radix-ui",
+        "react-day-picker",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "alert-dialog",
+        "avatar",
+        "badge",
+        "bubble",
+        "button",
+        "button-group",
+        "calendar",
+        "card",
+        "command",
+        "dialog",
+        "drawer",
+        "dropdown-menu",
+        "empty",
+        "field",
+        "input",
+        "input-group",
+        "item",
+        "message",
+        "popover",
+        "select",
+        "separator",
+        "spinner",
+        "switch",
+        "table",
+        "tabs",
+        "textarea",
+        "toggle-group",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/creation-flow-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/creation-flow-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/creation-flow.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/creation-flow.tsx"
+        },
+        {
+          "path": "src/components/design-system/drawer-anatomy-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/drawer-anatomy-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/field-hint.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/field-hint.tsx"
+        },
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/surface-decision-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/surface-decision-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/surface-demos.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/surface-demos.tsx"
+        },
+        {
+          "path": "src/components/design-system/surface-diagram.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/surface-diagram.tsx"
+        },
+        {
+          "path": "src/components/design-system/tabs-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/tabs-preview.tsx"
+        },
+        {
+          "path": "src/components/shared/data-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/data-table.tsx"
+        },
+        {
+          "path": "src/components/shared/filter-bar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/filter-bar.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/list-footer.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/list-footer.tsx"
+        },
+        {
+          "path": "src/components/shared/orb-avatar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/orb-avatar.tsx"
+        },
+        {
+          "path": "src/components/shared/orb-tones.ts",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/orb-tones.ts"
+        },
+        {
+          "path": "src/lib/design-system/data.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/design-system/data.ts"
+        },
+        {
+          "path": "src/lib/design-system/surface-audit.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/design-system/surface-audit.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-warning": "var(--warning)",
+          "color-success": "var(--success)",
+          "color-primary-tint": "var(--primary-tint)",
+          "color-primary-tint-foreground": "var(--primary-tint-foreground)",
+          "color-success-tint": "var(--success-tint)",
+          "color-success-tint-foreground": "var(--success-tint-foreground)",
+          "color-warning-tint": "var(--warning-tint)",
+          "color-warning-tint-foreground": "var(--warning-tint-foreground)",
+          "color-destructive-tint": "var(--destructive-tint)",
+          "color-destructive-tint-foreground": "var(--destructive-tint-foreground)",
+          "color-info": "var(--info)",
+          "color-info-tint": "var(--info-tint)",
+          "color-info-tint-foreground": "var(--info-tint-foreground)",
+          "color-orb-deep": "var(--orb-deep)",
+          "color-orb-body": "var(--orb-body)",
+          "color-orb-light": "var(--orb-light)"
+        },
+        "light": {
+          "warning": "oklch(0.769 0.188 70.08)",
+          "success": "oklch(0.627 0.17 149.2)",
+          "primary-tint": "oklch(0.948 0.019 291.8)",
+          "primary-tint-foreground": "oklch(0.411 0.108 291.8)",
+          "success-tint": "oklch(0.945 0.045 149.2)",
+          "success-tint-foreground": "oklch(0.402 0.098 149.2)",
+          "warning-tint": "oklch(0.955 0.055 70.08)",
+          "warning-tint-foreground": "oklch(0.402 0.086 55)",
+          "destructive-tint": "oklch(0.948 0.028 27.325)",
+          "destructive-tint-foreground": "oklch(0.442 0.176 27.325)",
+          "info": "oklch(0.54 0.15 250)",
+          "info-tint": "oklch(0.948 0.03 250)",
+          "info-tint-foreground": "oklch(0.43 0.11 250)",
+          "orb-deep": "oklch(0.499 0.265 287.9)",
+          "orb-body": "oklch(0.67 0.172 295.3)",
+          "orb-light": "oklch(0.825 0.086 302.1)"
+        }
+      },
+      "css": {
+        "@utility z-base": {
+          "z-index": "var(--z-base)"
+        },
+        "@utility z-raised": {
+          "z-index": "var(--z-raised)"
+        },
+        "@utility z-sticky": {
+          "z-index": "var(--z-sticky)"
+        },
+        "@utility z-nav": {
+          "z-index": "var(--z-nav)"
+        },
+        "@utility z-overlay": {
+          "z-index": "var(--z-overlay)"
+        },
+        "@utility z-modal": {
+          "z-index": "var(--z-modal)"
+        },
+        "@utility z-popover": {
+          "z-index": "var(--z-popover)"
+        },
+        "@utility z-toast": {
+          "z-index": "var(--z-toast)"
+        },
+        "@utility z-tooltip": {
+          "z-index": "var(--z-tooltip)"
+        },
+        ":root": {
+          "--z-base": "0",
+          "--z-raised": "10",
+          "--z-sticky": "20",
+          "--z-nav": "30",
+          "--z-overlay": "40",
+          "--z-modal": "50",
+          "--z-popover": "60",
+          "--z-toast": "70",
+          "--z-tooltip": "80"
+        }
+      }
+    },
+    {
+      "name": "ds-drawer-anatomy",
+      "type": "registry:block",
+      "title": "Drawer",
+      "description": "A panel from the side for configuring or reading one thing while the page behind stays in reach.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "alert-dialog",
+        "button",
+        "drawer",
+        "field",
+        "input",
+        "select",
+        "switch",
+        "textarea",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/drawer-anatomy-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/drawer-anatomy-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/field-hint.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/field-hint.tsx"
+        },
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "ds-integration-card",
+      "type": "registry:block",
+      "title": "Integration card",
+      "description": "A service the organisation can connect: who it is, whether it is connected, and the one thing to do next.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card",
+        "item",
+        "separator",
+        "table",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/design-system/integration-card-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/integration-card-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/tabs-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/tabs-preview.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/page-header.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/page-header.tsx"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-warning": "var(--warning)",
+          "color-success": "var(--success)",
+          "color-primary-tint": "var(--primary-tint)",
+          "color-primary-tint-foreground": "var(--primary-tint-foreground)",
+          "color-warning-tint": "var(--warning-tint)",
+          "color-warning-tint-foreground": "var(--warning-tint-foreground)"
+        },
+        "light": {
+          "warning": "oklch(0.769 0.188 70.08)",
+          "success": "oklch(0.627 0.17 149.2)",
+          "primary-tint": "oklch(0.948 0.019 291.8)",
+          "primary-tint-foreground": "oklch(0.411 0.108 291.8)",
+          "warning-tint": "oklch(0.955 0.055 70.08)",
+          "warning-tint-foreground": "oklch(0.402 0.086 55)"
+        }
+      }
+    },
+    {
+      "name": "ds-section-card",
+      "type": "registry:block",
+      "title": "Section card",
+      "description": "One block of a settings page: its title, what it is for, the one control it needs, and what it holds.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card",
+        "collapsible",
+        "input",
+        "item",
+        "separator",
+        "switch",
+        "table",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/section-card-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/section-card-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/tabs-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/tabs-preview.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/page-header.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/page-header.tsx"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "ds-creation-flow",
+      "type": "registry:block",
+      "title": "Creation flow",
+      "description": "Making something new on its own screen: pick how to start, answer one question a screen, and finish on a name.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "motion",
+        "radix-ui",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "alert-dialog",
+        "avatar",
+        "bubble",
+        "button",
+        "empty",
+        "field",
+        "input",
+        "input-group",
+        "item",
+        "message",
+        "spinner",
+        "toggle-group"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/creation-flow-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/creation-flow-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/creation-flow.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/creation-flow.tsx"
+        },
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/orb-avatar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/orb-avatar.tsx"
+        },
+        {
+          "path": "src/components/shared/orb-tones.ts",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/orb-tones.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-warning": "var(--warning)",
+          "color-orb-deep": "var(--orb-deep)",
+          "color-orb-body": "var(--orb-body)",
+          "color-orb-light": "var(--orb-light)"
+        },
+        "light": {
+          "warning": "oklch(0.769 0.188 70.08)",
+          "orb-deep": "oklch(0.499 0.265 287.9)",
+          "orb-body": "oklch(0.67 0.172 295.3)",
+          "orb-light": "oklch(0.825 0.086 302.1)"
+        }
+      },
+      "css": {
+        "@utility z-modal": {
+          "z-index": "var(--z-modal)"
+        },
+        ":root": {
+          "--z-modal": "50"
+        }
+      }
+    },
+    {
+      "name": "ds-json-view",
+      "type": "registry:block",
+      "title": "JSON",
+      "description": "A value read rather than dumped: folds, Copy, and two values compared key by key with only the differences tinted.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button",
+        "label",
+        "separator",
+        "switch",
+        "table",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/design-system/json-view-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/json-view-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/tabs-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/tabs-preview.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "ds-alert",
+      "type": "registry:block",
+      "title": "Alert",
+      "description": "Four intents, one recipe each, and every shape the platform needs — plus the alerts that should be something else.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "react-day-picker",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "alert",
+        "avatar",
+        "badge",
+        "breadcrumb",
+        "button",
+        "button-group",
+        "calendar",
+        "card",
+        "checkbox",
+        "collapsible",
+        "command",
+        "dropdown-menu",
+        "empty",
+        "field",
+        "input",
+        "input-group",
+        "item",
+        "popover",
+        "select",
+        "separator",
+        "sidebar",
+        "table",
+        "tabs",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/admin-view-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/admin-view-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/alert-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/alert-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/conversations-index-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/conversations-index-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/tabs-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/tabs-preview.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/call-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/call-table.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/fields-dropdown.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/fields-dropdown.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/icons.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/status-badges.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/status-badges.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/status-help.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/status-help.tsx"
+        },
+        {
+          "path": "src/components/shared/data-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/data-table.tsx"
+        },
+        {
+          "path": "src/components/shared/filter-bar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/filter-bar.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/list-footer.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/list-footer.tsx"
+        },
+        {
+          "path": "src/components/shared/page-header.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/page-header.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell-icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell-icons.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell.tsx"
+        },
+        {
+          "path": "src/lib/mockups/conversations-revamp-list-data.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/mockups/conversations-revamp-list-data.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-warning": "var(--warning)",
+          "color-success": "var(--success)",
+          "color-primary-tint": "var(--primary-tint)",
+          "color-primary-tint-foreground": "var(--primary-tint-foreground)",
+          "color-success-tint": "var(--success-tint)",
+          "color-success-tint-foreground": "var(--success-tint-foreground)",
+          "color-warning-tint": "var(--warning-tint)",
+          "color-warning-tint-foreground": "var(--warning-tint-foreground)",
+          "color-destructive-tint": "var(--destructive-tint)",
+          "color-destructive-tint-foreground": "var(--destructive-tint-foreground)"
+        },
+        "light": {
+          "warning": "oklch(0.769 0.188 70.08)",
+          "success": "oklch(0.627 0.17 149.2)",
+          "primary-tint": "oklch(0.948 0.019 291.8)",
+          "primary-tint-foreground": "oklch(0.411 0.108 291.8)",
+          "success-tint": "oklch(0.945 0.045 149.2)",
+          "success-tint-foreground": "oklch(0.402 0.098 149.2)",
+          "warning-tint": "oklch(0.955 0.055 70.08)",
+          "warning-tint-foreground": "oklch(0.402 0.086 55)",
+          "destructive-tint": "oklch(0.948 0.028 27.325)",
+          "destructive-tint-foreground": "oklch(0.442 0.176 27.325)"
+        }
+      }
+    },
+    {
+      "name": "ds-unsaved-changes",
+      "type": "registry:block",
+      "title": "Unsaved changes",
+      "description": "The bar that appears once a page has edits: what changed, Discard, and a review before anything goes live.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "card",
+        "collapsible",
+        "dialog",
+        "drawer",
+        "item",
+        "kbd",
+        "separator",
+        "table",
+        "tabs",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/save-bar-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/save-bar-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/tabs-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/tabs-preview.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/page-header.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/page-header.tsx"
+        },
+        {
+          "path": "src/components/shared/save-bar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/save-bar.tsx"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-success": "var(--success)",
+          "color-success-tint": "var(--success-tint)",
+          "color-success-tint-foreground": "var(--success-tint-foreground)",
+          "color-destructive-tint": "var(--destructive-tint)",
+          "color-destructive-tint-foreground": "var(--destructive-tint-foreground)"
+        },
+        "light": {
+          "success": "oklch(0.627 0.17 149.2)",
+          "success-tint": "oklch(0.945 0.045 149.2)",
+          "success-tint-foreground": "oklch(0.402 0.098 149.2)",
+          "destructive-tint": "oklch(0.948 0.028 27.325)",
+          "destructive-tint-foreground": "oklch(0.442 0.176 27.325)"
+        }
+      }
+    },
+    {
+      "name": "ds-developers",
+      "type": "registry:block",
+      "title": "Developers",
+      "description": "Everything for building on Sarj on one page: a quickstart that places a call through the public API, then keys, webhooks and variables.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "alert-dialog",
+        "avatar",
+        "breadcrumb",
+        "button",
+        "card",
+        "collapsible",
+        "dialog",
+        "field",
+        "input",
+        "input-group",
+        "item",
+        "select",
+        "separator",
+        "sidebar",
+        "table",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "src/components/mockups/developers/developers-page.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/developers/developers-page.tsx"
+        },
+        {
+          "path": "src/components/mockups/developers/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/developers/icons.tsx"
+        },
+        {
+          "path": "src/components/shared/data-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/data-table.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/page-header.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/page-header.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell-icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell-icons.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell.tsx"
+        },
+        {
+          "path": "src/lib/mockups/developers-data.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/mockups/developers-data.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "ds-admin-view",
+      "type": "registry:block",
+      "title": "Admin view",
+      "description": "The organisation a superadmin is reading a page as, and the control that switches it.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "react-day-picker",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "breadcrumb",
+        "button",
+        "button-group",
+        "calendar",
+        "card",
+        "checkbox",
+        "collapsible",
+        "command",
+        "dropdown-menu",
+        "field",
+        "input-group",
+        "item",
+        "popover",
+        "select",
+        "separator",
+        "sidebar",
+        "table",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/admin-view-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/admin-view-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/conversations-index-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/conversations-index-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/call-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/call-table.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/fields-dropdown.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/fields-dropdown.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/icons.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/status-badges.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/status-badges.tsx"
+        },
+        {
+          "path": "src/components/mockups/conversations-revamp/list/status-help.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/conversations-revamp/list/status-help.tsx"
+        },
+        {
+          "path": "src/components/shared/data-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/data-table.tsx"
+        },
+        {
+          "path": "src/components/shared/filter-bar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/filter-bar.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/list-footer.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/list-footer.tsx"
+        },
+        {
+          "path": "src/components/shared/page-header.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/page-header.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell-icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell-icons.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell.tsx"
+        },
+        {
+          "path": "src/lib/mockups/conversations-revamp-list-data.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/mockups/conversations-revamp-list-data.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-warning": "var(--warning)",
+          "color-success": "var(--success)",
+          "color-primary-tint": "var(--primary-tint)",
+          "color-primary-tint-foreground": "var(--primary-tint-foreground)",
+          "color-success-tint": "var(--success-tint)",
+          "color-success-tint-foreground": "var(--success-tint-foreground)",
+          "color-warning-tint": "var(--warning-tint)",
+          "color-warning-tint-foreground": "var(--warning-tint-foreground)",
+          "color-destructive-tint": "var(--destructive-tint)",
+          "color-destructive-tint-foreground": "var(--destructive-tint-foreground)"
+        },
+        "light": {
+          "warning": "oklch(0.769 0.188 70.08)",
+          "success": "oklch(0.627 0.17 149.2)",
+          "primary-tint": "oklch(0.948 0.019 291.8)",
+          "primary-tint-foreground": "oklch(0.411 0.108 291.8)",
+          "success-tint": "oklch(0.945 0.045 149.2)",
+          "success-tint-foreground": "oklch(0.402 0.098 149.2)",
+          "warning-tint": "oklch(0.955 0.055 70.08)",
+          "warning-tint-foreground": "oklch(0.402 0.086 55)",
+          "destructive-tint": "oklch(0.948 0.028 27.325)",
+          "destructive-tint-foreground": "oklch(0.442 0.176 27.325)"
+        }
+      }
+    },
+    {
+      "name": "ds-notifications",
+      "type": "registry:block",
+      "title": "Notifications",
+      "description": "A bell in the top bar with a dot for unread, opening a list where each notice leads to the thing it is about.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "react-day-picker",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "alert-dialog",
+        "avatar",
+        "badge",
+        "breadcrumb",
+        "button",
+        "button-group",
+        "calendar",
+        "collapsible",
+        "command",
+        "dropdown-menu",
+        "empty",
+        "field",
+        "input-group",
+        "item",
+        "popover",
+        "select",
+        "separator",
+        "sidebar",
+        "table",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/icons.tsx"
+        },
+        {
+          "path": "src/components/design-system/notifications-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/notifications-preview.tsx"
+        },
+        {
+          "path": "src/components/design-system/reference-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/reference-table.tsx"
+        },
+        {
+          "path": "src/components/design-system/tabs-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/tabs-preview.tsx"
+        },
+        {
+          "path": "src/components/mockups/live-scenarios/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/live-scenarios/icons.tsx"
+        },
+        {
+          "path": "src/components/mockups/live-scenarios/scenario-index.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/live-scenarios/scenario-index.tsx"
+        },
+        {
+          "path": "src/components/mockups/live-scenarios/status-chip.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/live-scenarios/status-chip.tsx"
+        },
+        {
+          "path": "src/components/shared/data-table.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/data-table.tsx"
+        },
+        {
+          "path": "src/components/shared/filter-bar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/filter-bar.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shared/list-footer.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/list-footer.tsx"
+        },
+        {
+          "path": "src/components/shared/notifications.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/notifications.tsx"
+        },
+        {
+          "path": "src/components/shared/page-header.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/page-header.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell-icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell-icons.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell.tsx"
+        },
+        {
+          "path": "src/lib/mockups/live-scenarios-data.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/mockups/live-scenarios-data.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-success": "var(--success)",
+          "color-primary-tint": "var(--primary-tint)",
+          "color-success-tint": "var(--success-tint)",
+          "color-success-tint-foreground": "var(--success-tint-foreground)"
+        },
+        "light": {
+          "success": "oklch(0.627 0.17 149.2)",
+          "primary-tint": "oklch(0.948 0.019 291.8)",
+          "success-tint": "oklch(0.945 0.045 149.2)",
+          "success-tint-foreground": "oklch(0.402 0.098 149.2)"
+        }
+      }
+    },
+    {
+      "name": "ds-orb-avatar",
+      "type": "registry:block",
+      "title": "Avatar",
+      "description": "A shader orb for anyone without a photo. The name moves the light, so the same name always gets the same orb.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "src/components/shared/orb-avatar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/orb-avatar.tsx"
+        },
+        {
+          "path": "src/components/shared/orb-tones.ts",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/orb-tones.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-orb-deep": "var(--orb-deep)",
+          "color-orb-body": "var(--orb-body)",
+          "color-orb-light": "var(--orb-light)"
+        },
+        "light": {
+          "orb-deep": "oklch(0.499 0.265 287.9)",
+          "orb-body": "oklch(0.67 0.172 295.3)",
+          "orb-light": "oklch(0.825 0.086 302.1)"
+        }
+      }
+    },
+    {
+      "name": "ds-recording",
+      "type": "registry:block",
+      "title": "Recording",
+      "description": "The mark for a live microphone: bars that grow from the centre with the voice and fall flat when it stops.",
+      "dependencies": [
+        "clsx",
+        "motion",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button",
+        "card",
+        "item",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/recording-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/recording-preview.tsx"
+        },
+        {
+          "path": "src/components/shared/recording-indicator.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/recording-indicator.tsx"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-destructive-tint": "var(--destructive-tint)"
+        },
+        "light": {
+          "destructive-tint": "oklch(0.948 0.028 27.325)"
+        }
+      }
+    },
+    {
+      "name": "ds-agent-states",
+      "type": "registry:block",
+      "title": "Agent states",
+      "description": "Listening, thinking and speaking: how a voice agent shows what it is doing, drawn three ways — dots, waves and a string.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "card",
+        "tabs",
+        "toggle-group"
+      ],
+      "files": [
+        {
+          "path": "src/components/design-system/agent-state-preview.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/design-system/agent-state-preview.tsx"
+        },
+        {
+          "path": "src/components/shared/agent-state/agent-shader.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/agent-state/agent-shader.tsx"
+        },
+        {
+          "path": "src/components/shared/agent-state/engine.ts",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/agent-state/engine.ts"
+        },
+        {
+          "path": "src/components/shared/agent-state/visuals.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/agent-state/visuals.tsx"
+        },
+        {
+          "path": "src/components/shared/orb-avatar.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/orb-avatar.tsx"
+        },
+        {
+          "path": "src/components/shared/orb-tones.ts",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/orb-tones.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-orb-deep": "var(--orb-deep)",
+          "color-orb-body": "var(--orb-body)",
+          "color-orb-light": "var(--orb-light)"
+        },
+        "light": {
+          "orb-deep": "oklch(0.499 0.265 287.9)",
+          "orb-body": "oklch(0.67 0.172 295.3)",
+          "orb-light": "oklch(0.825 0.086 302.1)"
+        }
+      }
+    },
+    {
       "name": "transfer-routing",
       "type": "registry:block",
       "title": "Design multiple routing options for Transfer tool",

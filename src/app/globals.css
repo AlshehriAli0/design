@@ -425,3 +425,584 @@
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+
+/*
+ * Raised button — the design-lab site's own pages only (the index), never a mockup.
+ * After navbar.gallery: no drop shadow at rest. The raised look comes from three insets
+ * (a hairline edge, a highlight along the top, a dark band along the bottom); hover lifts
+ * 2px and adds a soft shadow underneath. Unlayered, so it outranks the Button's variant
+ * utilities. Applied as a class on <Button>: `raised-button` (dark) or `raised-button-light`.
+ */
+.raised-button,
+.raised-button-light {
+  height: 2.25rem;
+  padding-inline: 1.125rem;
+  border: 0;
+  border-radius: 0.5625rem;
+  transition:
+    transform 200ms var(--ease-out-cubic),
+    background-color 200ms,
+    box-shadow 200ms;
+}
+
+.raised-button {
+  color: var(--background);
+  background-color: color-mix(in oklch, var(--foreground) 88%, var(--background));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--background) 12%, transparent),
+    inset 0 2px 3px color-mix(in oklch, var(--background) 10%, transparent),
+    inset 0 -4px 1px color-mix(in oklch, black 16%, transparent);
+}
+
+.raised-button:hover {
+  color: var(--background);
+  background-color: color-mix(in oklch, var(--foreground) 82%, var(--background));
+  transform: translateY(-2px);
+  box-shadow:
+    0 7px 4px color-mix(in oklch, black 13%, transparent),
+    inset 0 0 0 1px color-mix(in oklch, var(--background) 12%, transparent),
+    inset 0 2px 5px color-mix(in oklch, var(--background) 20%, transparent),
+    inset 0 -4px 1px color-mix(in oklch, black 20%, transparent);
+}
+
+.raised-button-light {
+  color: color-mix(in oklch, var(--foreground) 80%, var(--background));
+  background-color: var(--background);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--foreground) 8%, transparent),
+    inset 0 2px 1px color-mix(in oklch, var(--background) 60%, transparent),
+    inset 0 -4px 1px color-mix(in oklch, black 10%, transparent);
+}
+
+.raised-button-light:hover {
+  color: var(--foreground);
+  background-color: var(--background);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 12px color-mix(in oklch, black 12%, transparent),
+    inset 0 0 0 1px color-mix(in oklch, var(--foreground) 10%, transparent),
+    inset 0 2px 5px var(--background),
+    inset 0 -4.5px 1px color-mix(in oklch, black 17%, transparent);
+}
+
+.raised-button:active,
+.raised-button-light:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 100ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .raised-button,
+  .raised-button-light {
+    transition: none;
+  }
+  .raised-button:hover,
+  .raised-button-light:hover {
+    transform: none;
+  }
+}
+
+/*
+ * Site nav pill — the design lab's own top bar, never a mockup. After AlignUI: a white
+ * pill lifted by a stack of soft, widening shadows plus a hairline ring, instead of a border.
+ */
+.site-nav-pill {
+  box-shadow:
+    0 1px 1px 0.5px color-mix(in oklch, var(--foreground) 4%, transparent),
+    0 3px 3px -1.5px color-mix(in oklch, var(--foreground) 2%, transparent),
+    0 6px 6px -3px color-mix(in oklch, var(--foreground) 4%, transparent),
+    0 12px 12px -6px color-mix(in oklch, var(--foreground) 4%, transparent),
+    0 24px 24px -12px color-mix(in oklch, var(--foreground) 4%, transparent),
+    0 48px 48px -24px color-mix(in oklch, var(--foreground) 4%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--foreground) 4%, transparent),
+    inset 0 -1px 1px -0.5px color-mix(in oklch, var(--foreground) 6%, transparent);
+}
+
+/*
+ * Index card as a browser window — after AlignUI's live-editor frame. A grey frame with
+ * a hairline ring, the page inside on white, fading out toward the caption under it.
+ */
+.site-window {
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+  background-color: var(--muted);
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--foreground) 6%, transparent),
+    0 12px 24px -12px color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+.window-fade {
+  mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
+}
+
+.site-window-badge {
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--foreground) 6%, transparent),
+    0 0 0 6px color-mix(in oklch, var(--background) 60%, transparent),
+    0 0 0 7px color-mix(in oklch, var(--foreground) 6%, transparent),
+    0 8px 16px -6px color-mix(in oklch, var(--foreground) 12%, transparent);
+}
+
+/* The nav search field, sized to the raised button beside it: same height, same corners. */
+.nav-search-float {
+  border-radius: 0.5625rem;
+}
+
+.nav-search-field {
+  height: 2.25rem;
+  border-radius: 0.5625rem;
+}
+
+/* Centre the search glyph in the collapsed 36px field: (36 - 24) / 2, less the 1px border. */
+.nav-search-field > [data-align="inline-start"] {
+  margin-inline-start: 0;
+  padding-inline-start: 5px;
+}
+
+/* A primary arc running round the badge's outer ring, as on AlignUI's live-editor badge. */
+.site-window-badge::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg, transparent 0 60%, var(--primary) 100%);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), black calc(100% - 1px));
+  animation: badge-orbit 3s linear infinite;
+}
+
+@keyframes badge-orbit {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-window-badge::before {
+    animation: none;
+  }
+}
+
+/*
+ * The band behind the sticky nav. Solid down to the pill, then fading to nothing over its
+ * last 2rem, so content scrolling under it dissolves instead of being cut at a hard edge.
+ */
+.site-nav-band {
+  background: linear-gradient(to bottom, var(--background) calc(100% - 2rem), transparent);
+}
+
+/*
+ * Glass nav — the design-system overview only, where the page under it is a coloured surface,
+ * not bg-background. A frosted pill: a tenth of white over a heavy blur, one hairline, no lift.
+ */
+.site-nav-band.site-nav-glass {
+  background: none;
+}
+
+.site-nav-glass .site-nav-pill {
+  background: color-mix(in oklch, var(--primary-foreground) 8%, transparent);
+  color: var(--primary-foreground);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  backdrop-filter: blur(24px) saturate(1.5);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--primary-foreground) 14%, transparent),
+    inset 0 1px 0 color-mix(in oklch, var(--primary-foreground) 18%, transparent);
+}
+
+.site-nav-glass .site-nav-pill img {
+  filter: brightness(0) invert(1);
+}
+
+.site-nav-glass .nav-link {
+  color: color-mix(in oklch, var(--primary-foreground) 62%, transparent);
+}
+
+.site-nav-glass .nav-link:hover,
+.site-nav-glass .nav-link[aria-current="page"] {
+  color: var(--primary-foreground);
+}
+
+.site-nav-glass .nav-link::after {
+  background: var(--primary-foreground);
+}
+
+.site-nav-glass .nav-search-field {
+  border-color: color-mix(in oklch, var(--primary-foreground) 16%, transparent);
+  background: transparent;
+  color: var(--primary-foreground);
+}
+
+.site-nav-glass .nav-search-float,
+.site-nav-glass .nav-search-field,
+.site-nav-glass .nav-search-field * {
+  background: transparent;
+}
+
+/* The copy button beside search: same 36px height, radius and hairline as the field, so the two read as a pair. */
+.site-nav-glass .nav-glass-button {
+  border-radius: 0.5625rem;
+  border-color: color-mix(in oklch, var(--primary-foreground) 16%, transparent);
+  background: transparent;
+  color: var(--primary-foreground);
+}
+
+/* The search field opens leftward over the copy button; it is see-through here, so the button steps out while it is open. */
+.site-nav-glass .nav-glass-button {
+  transition: opacity 150ms var(--ease-out-cubic);
+}
+
+.site-nav-glass .site-nav-pill:has(.nav-search-field [aria-expanded="true"]) .nav-glass-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav-glass .nav-glass-button {
+    transition: none;
+  }
+}
+
+.site-nav-glass .nav-glass-button:hover {
+  background: color-mix(in oklch, var(--primary-foreground) 10%, transparent);
+  color: var(--primary-foreground);
+}
+
+.site-nav-glass .nav-search-field kbd {
+  background: transparent;
+  color: color-mix(in oklch, var(--primary-foreground) 55%, transparent);
+}
+
+.site-nav-glass .nav-search-field input::placeholder {
+  color: color-mix(in oklch, var(--primary-foreground) 55%, transparent);
+}
+
+/* The pill spans the overview's content column (lg:ps-56 lg:pe-12 in overview-tour.tsx), not the index's max-w-5xl. */
+@media (min-width: 64rem) {
+  .site-nav-band.site-nav-glass > div {
+    max-width: none;
+    padding-inline-start: 14rem;
+    padding-inline-end: 3rem;
+  }
+}
+
+.site-nav-glass .nav-search-field button,
+.site-nav-glass .nav-search-field input {
+  color: var(--primary-foreground);
+}
+
+/* ── Index micro-interactions ─────────────────────────────────────────────────────────
+ * Durations from the house scale: 150ms hover and press, 200ms small moves, 300ms entrances.
+ * Every hover is gated on a real pointer so a tap on a phone does not leave a card lifted,
+ * and the whole block switches off under reduced motion at the end.
+ */
+
+@keyframes enter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes enter-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.99);
+  }
+}
+
+/* The nav settles in from above; the cards rise in after it, 40ms apart, capped at eight. */
+.nav-enter {
+  animation: enter-drop 300ms var(--ease-out-cubic) both;
+}
+
+.window-enter {
+  animation: enter-rise 300ms var(--ease-out-cubic) both;
+  animation-delay: calc(80ms + min(var(--i, 0), 8) * 40ms);
+}
+
+.order-rail {
+  animation: enter-rise 300ms var(--ease-out-cubic) 200ms both;
+}
+
+/* Changelog entries settle in as they scroll into view: a fade and a 12px rise, tied to
+   scroll position rather than a timer, so scrolling back up runs it backwards. */
+@keyframes changelog-settle {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .changelog-entry {
+      animation: changelog-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+/* A shared link lands on its update and marks it: a tint behind it that fades over 2s. */
+@keyframes changelog-arrive {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.changelog-entry:target::before {
+  content: "";
+  position: absolute;
+  inset: -1rem -1.25rem;
+  z-index: -1;
+  border-radius: var(--radius-xl);
+  background-color: var(--primary-tint);
+  opacity: 0;
+  animation: changelog-arrive 2s var(--ease-in-out-cubic) 0.4s backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .changelog-entry:target::before {
+    animation: none;
+  }
+}
+
+/* The section list unfolds under "By section": a short fade and a 4px rise, 20ms apart. */
+@keyframes enter-settle {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.section-rail-item {
+  animation: enter-settle 200ms var(--ease-out-cubic) both;
+  animation-delay: calc(min(var(--i, 0), 10) * 20ms);
+}
+
+.nav-link:active,
+.nav-logo:active {
+  transform: scale(0.97);
+}
+
+.nav-link,
+.nav-logo {
+  transition-property: color, background-color, transform;
+}
+
+/* Icons inside the raised buttons: the arrow leans toward where it goes, the pointer tilts. */
+.raised-button > svg,
+.raised-button-light > svg {
+  transition: transform 200ms var(--ease-out-cubic);
+}
+
+.order-rail-item {
+  transition-property: color, background-color, transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .raised-button:hover > svg:last-child:not(:first-child),
+  .raised-button-light:hover > svg:last-child:not(:first-child) {
+    transform: translateX(3px);
+  }
+
+  [dir="rtl"] .raised-button:hover > svg:last-child:not(:first-child) {
+    transform: translateX(-3px);
+  }
+
+  .raised-button:hover > svg:first-child:not(:last-child) {
+    transform: rotate(-12deg) scale(1.08);
+  }
+
+
+  .order-rail-item:hover {
+    transform: translateX(2px);
+  }
+
+  [dir="rtl"] .order-rail-item:hover {
+    transform: translateX(-2px);
+  }
+}
+
+.order-rail-item:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-enter,
+  .window-enter,
+  .order-rail,
+  .section-rail-item {
+    animation: none;
+  }
+
+  .nav-link,
+  .nav-logo,
+  .raised-button > svg,
+  .raised-button-light > svg,
+  .order-rail-item {
+    transition: none;
+  }
+
+  .nav-logo:hover,
+  .order-rail-item:hover,
+  .raised-button:hover > svg,
+  .raised-button-light:hover > svg {
+    transform: none;
+  }
+}
+
+/* ── Reel player ─────────────────────────────────────────────────────────────────────── */
+
+/* The play button on the poster: a white disc, raised like the lab's buttons. */
+.reel-play {
+  width: 4rem;
+  height: 4rem;
+  border: 0;
+  border-radius: 9999px;
+  color: var(--foreground);
+  background-color: var(--background);
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--foreground) 8%, transparent),
+    0 0 0 8px color-mix(in oklch, var(--background) 40%, transparent),
+    0 6px 16px -8px color-mix(in oklch, black 18%, transparent),
+    inset 0 -3px 1px color-mix(in oklch, black 6%, transparent);
+  transition: transform 150ms var(--ease-out-cubic);
+}
+
+.reel-play svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.reel-play:active {
+  transform: scale(0.95);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .reel-play:hover {
+    transform: scale(1.05);
+  }
+}
+
+/*
+ * The floating control bar: a frosted white pill over the picture, held by a hairline and a
+ * soft, short shadow. It rises in on the first play, comes back quickly when the pointer
+ * moves (150ms), and leaves slower and softer — sinking 6px and blurring out over 300ms —
+ * so it steps aside rather than snapping off.
+ */
+.reel-bar {
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+  border-radius: 9999px;
+  background-color: color-mix(in oklch, var(--background) 82%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--foreground) 6%, transparent),
+    0 4px 12px -6px color-mix(in oklch, var(--foreground) 12%, transparent);
+  animation: reel-bar-in 250ms var(--ease-out-cubic) both;
+  transition:
+    opacity 150ms var(--ease-out-cubic),
+    transform 150ms var(--ease-out-cubic),
+    filter 150ms var(--ease-out-cubic);
+}
+
+.reel-bar[data-hidden] {
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  filter: blur(4px);
+  transition-duration: 300ms;
+  transition-timing-function: var(--ease-in-out-cubic);
+}
+
+@keyframes reel-bar-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+    filter: blur(4px);
+  }
+}
+
+.reel-player:fullscreen {
+  border-radius: 0;
+  background-color: black;
+}
+
+/* ── Index footer ────────────────────────────────────────────────────────────────────── */
+
+/* A hairline with a small square cap at each end, as on AlignUI's footer. */
+.footer-rule {
+  position: relative;
+  height: 1px;
+  background-color: var(--border);
+}
+
+.footer-rule::before,
+.footer-rule::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background-color: var(--background);
+}
+
+.footer-rule::before {
+  inset-inline-start: 0;
+}
+
+.footer-rule::after {
+  inset-inline-end: 0;
+}
+
+/* The wordmark in outline at display size, cut off by the page's foot and fading into it. */
+.footer-mark {
+  /* Ink edge to ink edge as wide as the nav and the footer row: in Nunito bold at this
+     tracking, the letters' ink is 2.401em wide and starts 0.038em in from the box. */
+  margin-bottom: -0.3em;
+  margin-inline-start: -0.058em;
+  /* The mask clips to this box, so pad it past the ink or the last stroke is shaved off. */
+  width: fit-content;
+  padding-inline: 0.02em;
+  font-size: calc(100cqw / 2.401);
+  white-space: nowrap;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklch, var(--foreground) 18%, transparent);
+}
+
+/* Only the outline fades into the foot of the page; the hover trail stays at full strength. */
+.footer-mark > span {
+  /* A box of its own, padded past the ink, or the mask shaves the last stroke. */
+  display: inline-block;
+  padding-inline: 0.02em;
+  margin-inline: -0.02em;
+  mask-image: linear-gradient(to bottom, black 35%, transparent 90%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-play,
+  .reel-bar {
+    transition: none;
+    animation: none;
+  }
+  .reel-bar[data-hidden] {
+    transform: none;
+    filter: none;
+  }
+  .reel-play:hover,
+  .reel-play:active {
+    transform: none;
+  }
+}
+
+/* The scrubber's unplayed track, visible against the near-white bar (the primitive's muted track disappears into it). */
+.reel-bar [data-slot="slider-track"] {
+  background-color: color-mix(in oklch, var(--foreground) 14%, transparent);
+}

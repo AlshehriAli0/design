@@ -815,6 +815,13 @@ const PRODUCT_COMPONENTS: DocsPage[] = [
       "The mark for a live microphone: bars that grow from the centre with the voice and fall flat when it stops.",
     sarj: true,
   },
+  {
+    id: "agent-states",
+    title: "Agent states",
+    description:
+      "Listening, thinking and speaking: how a voice agent shows what it is doing, drawn three ways — dots, waves and a string.",
+    sarj: true,
+  },
 ]
 
 const SARJ_FOUNDATIONS = new Set([

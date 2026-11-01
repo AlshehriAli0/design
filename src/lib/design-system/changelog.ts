@@ -14,6 +14,57 @@ export type ChangelogEntry = {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "2026-11-01",
+    title: "The overview is a tour of the system, and copies it as one file",
+    changes: [
+      {
+        kind: "changed",
+        text: "The overview is one long page: each section gets a screen of its own, over a graph of every topic that moves to the section being read.",
+      },
+      {
+        kind: "changed",
+        text: "Section addresses open the overview at that section, and closing a topic returns there.",
+      },
+      {
+        kind: "added",
+        text: "Copy design system, in the overview's nav: the whole system as one markdown file for an agent to load — rules, colour, layers, motion, patterns, surfaces, components and the lint rules.",
+      },
+      {
+        kind: "added",
+        text: "The file is generated from the same data the pages render, so it changes when a rule does.",
+      },
+      {
+        kind: "added",
+        text: "The same file is a public registry item, design-system, that installs as a Claude skill — the docs site is private, the registry is not.",
+      },
+      {
+        kind: "added",
+        text: "Every Components topic is its own registry item, ds-<topic>, and the file links each component to it rather than to a page nobody outside can open.",
+      },
+    ],
+  },
+  {
+    date: "2026-11-01",
+    title: "A voice agent shows whether it is listening, thinking or speaking",
+    summary:
+      "An exploration: three ways to draw the same three states, to pick one from.",
+    changes: [
+      {
+        kind: "added",
+        text: "Agent states topic under Components: every state side by side, and a switcher to watch one state blend into the next.",
+      },
+      {
+        kind: "added",
+        text: "Three visuals in components/shared/agent-state: a dot matrix on a 2D canvas, and waves and a three-strand string as WebGL shaders, all in the orb's violets.",
+      },
+      {
+        kind: "added",
+        text: "Listening and speaking follow a voice level, the caller's and the agent's; thinking hears nothing and runs on its own.",
+      },
+    ],
+    topics: ["agent-states"],
+  },
+  {
     date: "2026-10-28",
     title: "A failure takes the smallest piece of the screen it can",
     summary:

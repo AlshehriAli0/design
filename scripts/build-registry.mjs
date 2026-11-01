@@ -1,7 +1,27 @@
-import { existsSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, writeFileSync } from "node:fs"
 import path from "node:path"
 
+import { createJiti } from "jiti"
+
 import { ROOT, SRC, collect, read, readMockups } from "./lib/import-graph.mjs"
+
+/*
+ * The design system's own items are described in TypeScript (src/lib/design-system), so load it
+ * through jiti — already installed with Tailwind — with the `@/` alias the app uses.
+ */
+const jiti = createJiti(import.meta.url, { alias: { "@": SRC } })
+const { DESIGN_SYSTEM_MD } = await jiti.import(
+  path.join(SRC, "lib/design-system/design-system-md.ts"),
+)
+const { DOCS_SECTIONS } = await jiti.import(
+  path.join(SRC, "lib/design-system/data.ts"),
+)
+const {
+  COMPONENT_ENTRIES,
+  DESIGN_SYSTEM_ITEM,
+  DESIGN_SYSTEM_TARGET,
+  componentItem,
+} = await jiti.import(path.join(SRC, "lib/design-system/registry-items.ts"))
 
 const NAMESPACE = "sarj"
 
@@ -159,24 +179,23 @@ function entryFor({ slug, registryEntry }) {
 
 const tokens = readTokens()
 
-const items = readMockups().map((mockup) => {
-  const { files, registryDependencies, dependencies } = collect(
-    entryFor(mockup),
-  )
+/** One installable block: an entry file and everything it imports, with the tokens those files use. */
+function blockItem({ name, title, description, entry }) {
+  const { files, registryDependencies, dependencies } = collect(entry)
   const { cssVars, css } = styling(tokensFor(files, tokens), tokens)
 
   const tokenCount =
     Object.keys(cssVars.light ?? {}).length +
     Object.keys(css[":root"] ?? {}).length
   console.log(
-    `${mockup.slug}: ${files.size} files, ${registryDependencies.size} ui, ${dependencies.size} deps, ${tokenCount} tokens`,
+    `${name}: ${files.size} files, ${registryDependencies.size} ui, ${dependencies.size} deps, ${tokenCount} tokens`,
   )
 
   return {
-    name: mockup.slug,
+    name,
     type: "registry:block",
-    title: mockup.title,
-    description: mockup.description,
+    title,
+    description,
     dependencies: [...dependencies].sort(),
     registryDependencies: [...registryDependencies].sort(),
     files: [...files].sort().map((file) => ({
@@ -186,7 +205,67 @@ const items = readMockups().map((mockup) => {
     ...(Object.keys(cssVars).length ? { cssVars } : {}),
     ...(Object.keys(css).length ? { css } : {}),
   }
+}
+
+const mockupItems = readMockups().map((mockup) =>
+  blockItem({
+    name: mockup.slug,
+    title: mockup.title,
+    description: mockup.description,
+    entry: entryFor(mockup),
+  }),
+)
+
+/* Every Components topic's demo, so someone who cannot open the docs site can still get the source. */
+const topics = new Map(
+  DOCS_SECTIONS.flatMap((section) =>
+    section.groups.flatMap((group) => group.pages),
+  ).map((page) => [page.id, page]),
+)
+
+const componentItems = Object.entries(COMPONENT_ENTRIES).map(([id, rel]) => {
+  const topic = topics.get(id)
+  if (!topic)
+    throw new Error(
+      `COMPONENT_ENTRIES names "${id}", which is not a docs topic`,
+    )
+  const entry = path.join(SRC, ...rel.split("/"))
+  if (!existsSync(entry)) throw new Error(`No entry for ${id}: src/${rel}`)
+  return blockItem({
+    name: componentItem(id),
+    title: topic.title,
+    description: topic.description,
+    entry,
+  })
 })
+
+/* The whole-system markdown, written to a file so shadcn build can embed it, and installed as a skill. */
+const skillPath = path.join(ROOT, "registry", DESIGN_SYSTEM_ITEM, "SKILL.md")
+mkdirSync(path.dirname(skillPath), { recursive: true })
+writeFileSync(
+  skillPath,
+  DESIGN_SYSTEM_MD.endsWith("\n") ? DESIGN_SYSTEM_MD : `${DESIGN_SYSTEM_MD}\n`,
+)
+console.log(
+  `${DESIGN_SYSTEM_ITEM}: ${DESIGN_SYSTEM_MD.length} characters of markdown`,
+)
+
+const designSystemItem = {
+  name: DESIGN_SYSTEM_ITEM,
+  type: "registry:item",
+  title: "Sarj design system",
+  description:
+    "The whole Sarj design system as one markdown file — tokens, layers, motion, patterns, surfaces, components and the lint rules — installed as a Claude skill.",
+  files: [
+    {
+      path: path.relative(ROOT, skillPath).split(path.sep).join("/"),
+      type: "registry:file",
+      target: DESIGN_SYSTEM_TARGET,
+    },
+  ],
+}
+
+const items = [designSystemItem, ...componentItems, ...mockupItems]
 
 // shadcn rewrites `@/` imports by basename, so two shipped files sharing one compile against the wrong file.
 function clashes(item) {
@@ -201,6 +280,7 @@ function clashes(item) {
 }
 
 for (const item of items) {
+  if (item.type !== "registry:block") continue
   for (const paths of clashes(item)) {
     console.warn(
       `  ! ${item.name}: ${paths.length} files named ${paths[0].split("/").pop()} — shadcn resolves imports by basename and will wire one of these to the other:\n      ${paths.join("\n      ")}`,

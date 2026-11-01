@@ -6,6 +6,53 @@ import {
   LINT_RULES,
 } from "@/lib/design-system/data"
 
+/**
+ * Foundations as markdown lines, from `## Rules` down. Shared by the "Copy as skill" button and
+ * the whole-system markdown (design-system-md.ts), so the two never disagree.
+ */
+export function foundationsBody(): string[] {
+  return [
+    "## Rules",
+    "",
+    ...GLOBAL_RULES.map((rule) => `- **${rule.label}** — ${rule.detail}`),
+    "",
+    "## Colour",
+    "",
+    ...COLOUR_GROUPS.flatMap((group) => [
+      `### ${group.title}`,
+      "",
+      group.note,
+      "",
+      ...group.tokens.map(
+        (token) => `- \`--${token.name}\`: ${token.value} — ${token.use}`,
+      ),
+      "",
+    ]),
+    "## Layering",
+    "",
+    "Name the layer, never the number.",
+    "",
+    ...LAYER_TOKENS.map(
+      (layer) => `- \`${layer.name}\` (${layer.value}) — ${layer.what}`,
+    ),
+    "",
+    "## Control scale",
+    "",
+    ...CONTROL_STEPS.map(
+      (step) =>
+        `- ${step.px}px — button ${step.button}${step.field ? `, field ${step.field}` : ""}. ${step.when}`,
+    ),
+    "",
+    "## Enforced by npm run lint",
+    "",
+    ...LINT_RULES.map(
+      (rule) =>
+        `- \`sarj/${rule.id}\` bans ${rule.bans}. Instead: ${rule.instead}`,
+    ),
+    "",
+  ]
+}
+
 export const FOUNDATIONS_SKILL = [
   "---",
   "name: sarj-foundations",
@@ -16,42 +63,5 @@ export const FOUNDATIONS_SKILL = [
   "",
   "Nothing here is a judgement call. Use the tokens, never a literal.",
   "",
-  "## Rules",
-  "",
-  ...GLOBAL_RULES.map((rule) => `- **${rule.label}** — ${rule.detail}`),
-  "",
-  "## Colour",
-  "",
-  ...COLOUR_GROUPS.flatMap((group) => [
-    `### ${group.title}`,
-    "",
-    group.note,
-    "",
-    ...group.tokens.map(
-      (token) => `- \`--${token.name}\`: ${token.value} — ${token.use}`,
-    ),
-    "",
-  ]),
-  "## Layering",
-  "",
-  "Name the layer, never the number.",
-  "",
-  ...LAYER_TOKENS.map(
-    (layer) => `- \`${layer.name}\` (${layer.value}) — ${layer.what}`,
-  ),
-  "",
-  "## Control scale",
-  "",
-  ...CONTROL_STEPS.map(
-    (step) =>
-      `- ${step.px}px — button ${step.button}${step.field ? `, field ${step.field}` : ""}. ${step.when}`,
-  ),
-  "",
-  "## Enforced by npm run lint",
-  "",
-  ...LINT_RULES.map(
-    (rule) =>
-      `- \`sarj/${rule.id}\` bans ${rule.bans}. Instead: ${rule.instead}`,
-  ),
-  "",
+  ...foundationsBody(),
 ].join("\n")

@@ -165,7 +165,7 @@ function getRenderer(): Renderer | null {
 // A hidden element wearing the class resolves the colour (possibly oklch or lab), and a 2D canvas turns it into sRGB.
 let probe: CanvasRenderingContext2D | null = null
 
-function classRgb(className: string): Rgb {
+export function classRgb(className: string): Rgb {
   probe ??= document
     .createElement("canvas")
     .getContext("2d", { willReadFrequently: true })

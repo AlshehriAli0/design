@@ -33,7 +33,7 @@ export function CopySkillButton({
   }
 
   return (
-    <Button onClick={copy} size="sm" variant="ghost">
+    <Button className="raised-button" onClick={copy}>
       {copied ? <CopiedIcon /> : <CopyIcon />}
       Copy skill file
     </Button>
