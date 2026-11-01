@@ -70,12 +70,6 @@ function useOpenTopicLink(topicId: string) {
   }
 }
 
-/** The topic id in a docs address, if it has one: /design-system/<section>/<topic>. */
-function topicInPath(pathname: string): string | null {
-  const parts = pathname.slice(DOCS_ROOT.length).split("/").filter(Boolean)
-  return parts[1] ?? null
-}
-
 function useWide() {
   const [wide, setWide] = useState(false)
   useEffect(() => {
@@ -142,48 +136,33 @@ export function OverviewTour({
   const wide = useWide()
   const frame = useFrame(!wide || reduced)
   /*
-   * The open topic lives in this page, not in a route change: opening pushes the topic's address
-   * and slides the sheet up; closing slides it down and steps the address back. The overview never
-   * unmounts, so nothing behind the sheet replays or jumps.
+   * The open topic lives in this page, not in a route: opening and closing rewrite the address in
+   * place (replaceState), so the topic stays shareable while Next never navigates. A Back-driven
+   * navigation would change the route's params and remount the whole overview — losing the scroll
+   * and replaying everything behind the sheet.
    */
   const [topic, setTopic] = useState<string | null>(initialTopic)
   /* True only for a topic loaded directly, so its sheet is simply there; any later open animates. */
   const [instant, setInstant] = useState(Boolean(initialTopic))
-  const pushed = useRef(false)
+  /* The address to return to on close: where the reader was when they opened the topic. */
+  const back = useRef<string | null>(null)
 
   const openTopic = (topicId: string) => {
+    back.current = window.location.pathname + window.location.hash
     setInstant(false)
-    window.history.pushState(null, "", docsHref(topicId))
-    pushed.current = true
+    window.history.replaceState(window.history.state, "", docsHref(topicId))
     setTopic(topicId)
   }
 
   const closeTopic = useCallback(() => {
     setInstant(false)
-    if (pushed.current) {
-      /* Step back to the address this page pushed from; popstate below clears the sheet. */
-      window.history.back()
-      return
-    }
-    const sectionId = initialSection
-    window.history.replaceState(
-      null,
-      "",
-      sectionId ? `${DOCS_ROOT}#${sectionId}` : DOCS_ROOT,
-    )
+    const to =
+      back.current ??
+      (initialSection ? `${DOCS_ROOT}#${initialSection}` : DOCS_ROOT)
+    window.history.replaceState(window.history.state, "", to)
+    back.current = null
     setTopic(null)
   }, [initialSection])
-
-  useEffect(() => {
-    function onPop() {
-      const next = topicInPath(window.location.pathname)
-      pushed.current = false
-      setInstant(false)
-      setTopic(next)
-    }
-    window.addEventListener("popstate", onPop)
-    return () => window.removeEventListener("popstate", onPop)
-  }, [])
 
   useEffect(() => {
     if (!initialSection) return
