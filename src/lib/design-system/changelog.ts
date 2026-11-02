@@ -14,6 +14,55 @@ export type ChangelogEntry = {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "2026-11-02",
+    title: "The buttons page shows every button and nothing else",
+    changes: [
+      {
+        kind: "changed",
+        text: "Buttons is one specimen sheet inside the lab's browser-window frame: a hairline cell per button, a role per column, a size per row, and the four icon-only sizes in the last row, each captioned role · size.",
+      },
+      {
+        kind: "removed",
+        text: "The sizes and roles tables, with their when-to-use and why notes, are off the page. The same guidance still ships in the design-system file.",
+      },
+      {
+        kind: "removed",
+        text: "The page's section label and lead line: the header is the title alone.",
+      },
+    ],
+    topics: ["buttons"],
+  },
+  {
+    date: "2026-11-02",
+    title: "Buttons are lit surfaces instead of flat fills",
+    changes: [
+      {
+        kind: "changed",
+        text: "The default Button fills from primary at the top to a darker primary at the bottom, under a white sheen across its top half.",
+      },
+      {
+        kind: "changed",
+        text: "Its edge is a gradient, lighter at the top and darker at the bottom, inside a 1px darker-primary ring, with a soft shade along the inner bottom and a short drop below.",
+      },
+      {
+        kind: "changed",
+        text: "Hover lightens the fill 6% instead of fading it to 80%; press scales it to 99%.",
+      },
+      {
+        kind: "changed",
+        text: "Outline, secondary and destructive take the same surface in their own colours: white, grey, and destructive's soft red tint, each with a faint ring and a short drop. Hover sinks them 4% toward foreground.",
+      },
+      {
+        kind: "changed",
+        text: "Ghost stays flat at rest and takes the secondary surface on hover or while its menu is open.",
+      },
+      {
+        kind: "added",
+        text: "Every colour is mixed from the variant's own tokens, in globals.css rather than the generated primitive, so a rebrand carries through and shadcn can still regenerate ui/button.tsx.",
+      },
+    ],
+  },
+  {
     date: "2026-11-01",
     title: "The overview is a tour of the system, and copies it as one file",
     changes: [

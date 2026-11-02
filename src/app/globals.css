@@ -1006,3 +1006,167 @@
 .reel-bar [data-slot="slider-track"] {
   background-color: color-mix(in oklch, var(--foreground) 14%, transparent);
 }
+
+/* ── Button surfaces ─────────────────────────────────────────────────────────────────
+ * Every Button variant is a lit surface (after Aceternity's t-surface): a fill that runs
+ * from --s-top to --s-bottom, an optional sheen over the top half, a gradient edge
+ * (--s-edge-top to --s-edge-bottom) inside a 1px --s-ring, a soft shade along the inner
+ * bottom, and a short two-step drop. Each variant only sets those variables, mixed from
+ * its own tokens — so colours stay the system's, and a rebrand carries through.
+ * Primary lifts toward white on hover; the quiet variants sink 4% toward foreground.
+ * Ghost stays flat at rest and takes the secondary surface on hover.
+ * Lives here, not in ui/button.tsx, because shadcn regenerates the primitive. Opted out:
+ * the site's raised buttons, the reel poster's play disc, buttons inside an input group
+ * (the search clear) and the sort rail's rows.
+ */
+[data-slot="button"]:not(.raised-button, .raised-button-light, .reel-play, .order-rail-item, [data-slot="input-group"] *) {
+  --s-sheen: transparent;
+  --s-shade: transparent;
+  --s-focus: 0 0 0 0 transparent;
+}
+
+:is(
+    [data-slot="button"][data-variant="default"],
+    [data-slot="button"][data-variant="outline"],
+    [data-slot="button"][data-variant="secondary"],
+    [data-slot="button"][data-variant="destructive"],
+    [data-slot="button"][data-variant="ghost"]:hover,
+    [data-slot="button"][data-variant="ghost"][aria-expanded="true"]
+  ):not(.raised-button, .raised-button-light, .reel-play, .order-rail-item, [data-slot="input-group"] *) {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--s-sheen), transparent 50%) padding-box,
+    linear-gradient(var(--s-top), var(--s-bottom)) padding-box,
+    linear-gradient(
+        var(--s-edge-top),
+        color-mix(in oklch, var(--s-edge-top), var(--s-edge-bottom)),
+        var(--s-edge-bottom)
+      )
+      border-box;
+  box-shadow:
+    var(--s-focus),
+    0 0 0 1px var(--s-ring),
+    inset 0 -3px 6px -3px var(--s-shade),
+    0 1px 1px 0 var(--s-drop-near),
+    0 2px 4px 0 var(--s-drop);
+  transition:
+    box-shadow 150ms var(--ease-out-cubic),
+    transform 150ms var(--ease-out-cubic);
+}
+
+/* Primary: the brand fill, darkening downward, with a white sheen and a lit edge. */
+[data-slot="button"][data-variant="default"] {
+  --s-top: var(--primary);
+  --s-bottom: color-mix(in oklch, var(--primary), black 14%);
+  --s-sheen: color-mix(in oklch, white 12%, transparent);
+  --s-edge-top: color-mix(in oklch, var(--primary), white 32%);
+  --s-edge-bottom: color-mix(in oklch, var(--primary), black 22%);
+  --s-ring: color-mix(in oklch, var(--primary), black 32%);
+  --s-shade: color-mix(in oklch, black 18%, transparent);
+  --s-drop-near: color-mix(in oklch, var(--s-ring) 12%, transparent);
+  --s-drop: color-mix(in oklch, var(--s-ring) 16%, transparent);
+}
+
+[data-slot="button"][data-variant="default"]:hover {
+  --s-top: color-mix(in oklch, var(--primary), white 6%);
+  --s-bottom: color-mix(in oklch, var(--primary) 94%, black 14%);
+}
+
+/* Outline: white, a hair darker at the foot, held by a faint ring. */
+[data-slot="button"][data-variant="outline"] {
+  --s-top: var(--background);
+  --s-bottom: color-mix(in oklch, var(--background), var(--foreground) 3%);
+  --s-edge-top: transparent;
+  --s-edge-bottom: color-mix(in oklch, var(--foreground) 6%, transparent);
+  --s-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --s-drop-near: color-mix(in oklch, var(--foreground) 3%, transparent);
+  --s-drop: color-mix(in oklch, var(--foreground) 4%, transparent);
+}
+
+/* Secondary — and ghost when pointed at or open: the grey surface. */
+[data-slot="button"]:is([data-variant="secondary"], [data-variant="ghost"]) {
+  --s-top: var(--secondary);
+  --s-bottom: color-mix(in oklch, var(--secondary), var(--foreground) 3%);
+  --s-edge-top: transparent;
+  --s-edge-bottom: color-mix(in oklch, var(--foreground) 6%, transparent);
+  --s-ring: color-mix(in oklch, var(--foreground) 11%, transparent);
+  --s-drop-near: color-mix(in oklch, var(--foreground) 4%, transparent);
+  --s-drop: color-mix(in oklch, var(--foreground) 5%, transparent);
+}
+
+/* Destructive keeps its soft tint — it confirms first, so it does not shout — on the same surface. */
+[data-slot="button"][data-variant="destructive"] {
+  --s-top: color-mix(in oklch, var(--destructive) 9%, var(--background));
+  --s-bottom: color-mix(in oklch, var(--destructive) 14%, var(--background));
+  --s-edge-top: transparent;
+  --s-edge-bottom: color-mix(in oklch, var(--destructive) 16%, transparent);
+  --s-ring: color-mix(in oklch, var(--destructive) 22%, transparent);
+  --s-drop-near: color-mix(in oklch, var(--destructive) 5%, transparent);
+  --s-drop: color-mix(in oklch, var(--destructive) 7%, transparent);
+}
+
+[data-slot="button"][data-variant="outline"]:is(:hover, [aria-expanded="true"]) {
+  --s-top: color-mix(in oklch, var(--background), var(--foreground) 4%);
+  --s-bottom: color-mix(in oklch, var(--background), var(--foreground) 7%);
+}
+
+[data-slot="button"][data-variant="secondary"]:is(:hover, [aria-expanded="true"]) {
+  --s-top: color-mix(in oklch, var(--secondary), var(--foreground) 4%);
+  --s-bottom: color-mix(in oklch, var(--secondary), var(--foreground) 7%);
+}
+
+[data-slot="button"][data-variant="destructive"]:hover {
+  --s-top: color-mix(in oklch, var(--destructive) 13%, var(--background));
+  --s-bottom: color-mix(in oklch, var(--destructive) 18%, var(--background));
+}
+
+/* The surface owns box-shadow, so the focus ring is folded back into it. */
+[data-slot="button"]:focus-visible {
+  --s-focus: 0 0 0 4px color-mix(in oklch, var(--ring) 50%, transparent);
+}
+
+[data-slot="button"]:is([data-variant="default"], [data-variant="outline"], [data-variant="secondary"], [data-variant="destructive"]):not(.raised-button, .raised-button-light, .reel-play, .order-rail-item, [data-slot="input-group"] *):active {
+  transform: scale(0.99);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot="button"] {
+    transition: none;
+  }
+  [data-slot="button"]:active {
+    transform: none;
+  }
+}
+
+/* ── Spec grid ───────────────────────────────────────────────────────────────────────
+ * A grid of specimens split by hairlines, with a small cross where four cells meet —
+ * a drafting sheet's registration mark. Four columns: each cell draws its right and
+ * bottom line, the last column and the last row drop theirs, and every cell that is in
+ * neither marks its own bottom-right corner.
+ */
+.spec-grid > .spec-cell {
+  border-inline-end: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.spec-grid > .spec-cell:nth-child(4n) {
+  border-inline-end: 0;
+}
+
+.spec-grid > .spec-cell:nth-last-child(-n + 4) {
+  border-bottom: 0;
+}
+
+.spec-grid > .spec-cell:not(:nth-child(4n)):not(:nth-last-child(-n + 4))::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset-inline-end: -5px;
+  bottom: -5px;
+  width: 9px;
+  height: 9px;
+  background:
+    linear-gradient(var(--muted-foreground), var(--muted-foreground)) center / 1px 100% no-repeat,
+    linear-gradient(var(--muted-foreground), var(--muted-foreground)) center / 100% 1px no-repeat;
+  opacity: 0.5;
+}

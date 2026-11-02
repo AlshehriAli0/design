@@ -1,4 +1,4 @@
-import { ButtonRoles } from "@/components/design-system/button-roles"
+import { ButtonShowcase } from "@/components/design-system/button-showcase"
 import { ColourTable } from "@/components/design-system/colour-table"
 import { OrbAnatomy } from "@/components/design-system/orb-anatomy"
 import { OrbAvatar } from "@/components/shared/orb-avatar"
@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/avatar"
 import { DesignSystemDocs } from "@/components/design-system/docs-shell"
 import { PatternAnatomy } from "@/components/design-system/pattern-anatomy"
-import { ButtonSizes } from "@/components/design-system/button-sizes"
 import { ChipNotes } from "@/components/design-system/chip-notes"
 import { SaveBarPreview } from "@/components/design-system/save-bar-preview"
 import { SectionCardPreview } from "@/components/design-system/section-card-preview"
@@ -197,12 +196,7 @@ export default async function DesignSystemPage({
           </div>
         ),
 
-        buttons: (
-          <div className="flex flex-col gap-8">
-            <ButtonSizes />
-            <ButtonRoles />
-          </div>
-        ),
+        buttons: <ButtonShowcase />,
         forms: (
           <Card>
             <CardContent className="grid gap-8 lg:grid-cols-2">
