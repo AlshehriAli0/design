@@ -397,6 +397,17 @@ export const MOCKUPS: Mockup[] = [
     tickets: ["INT-287"],
     added: "2026-10-28T05:02:24.794Z",
   },
+  {
+    href: "/voice-ownership",
+    title: "Global vs organization voices",
+    meta: "Dialog · in progress",
+    surface: "Personas",
+    description:
+      "The persona list gains a Voice column with who owns each voice, so duplicates show. In the edit dialog, voices split into your organization's own and a short Sarj list, one name each with the provider underneath, and Nour gone.",
+    icon: VoiceIdIcon,
+    tickets: ["DES-207", "INT-192"],
+    added: "2026-11-03T08:42:58.592Z",
+  },
   // `npm run new` appends new mockups above this line.
 ]
 
