@@ -48,6 +48,10 @@ const v = (
 export const VOICES: Voice[] = [
   // The organization's own — cloned under DES-198.
   v("saad", "Sarj TTS", "org", "Arabic", "Male"),
+  v("maha", "Sarj TTS", "org", "Arabic", "Female"),
+  v("hessa", "ElevenLabs", "org", "Arabic", "Female"),
+  v("grace", "ElevenLabs", "org", "English", "Female"),
+  v("adam", "ElevenLabs", "org", "English", "Male"),
 
   v("khalid", "ElevenLabs", "sarj", "Arabic", "Male"),
   v("fares", "Azure", "sarj", "Arabic", "Male"),
