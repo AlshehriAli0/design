@@ -14,14 +14,15 @@
   "preview_urls": true,
   "assets": {
     "binding": "ASSETS",
-    "directory": ".open-next/assets"
+    "directory": ".open-next/assets",
   },
   // next/image is used on the index and in the two shells. Without this
   // binding the optimiser has nothing to call and every image 500s.
   "images": {
-    "binding": "IMAGES"
+    "binding": "IMAGES",
   },
   "observability": {
-    "enabled": true
-  }
+    "redact_query_string": true,
+    "enabled": true,
+  },
 }
