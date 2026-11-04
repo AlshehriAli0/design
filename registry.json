@@ -5911,6 +5911,115 @@
           "--z-tooltip": "80"
         }
       }
+    },
+    {
+      "name": "opportunity-triage",
+      "type": "registry:block",
+      "title": "Resolve or dismiss opportunities",
+      "description": "On a scenario's Optimization Opportunities tab, resolve or dismiss each opportunity, switch between open, resolved and dismissed, and tell new ones from ones that came back after a decision.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "sonner",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "breadcrumb",
+        "button",
+        "collapsible",
+        "empty",
+        "separator",
+        "sidebar",
+        "skeleton",
+        "tabs",
+        "toggle-group",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/app/(mockups)/opportunity-triage/page.tsx",
+          "type": "registry:page",
+          "target": "app/opportunity-triage/page.tsx"
+        },
+        {
+          "path": "src/components/mockups/opportunity-triage/icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/opportunity-triage/icons.tsx"
+        },
+        {
+          "path": "src/components/mockups/opportunity-triage/opportunities-panel.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/mockups/opportunity-triage/opportunities-panel.tsx"
+        },
+        {
+          "path": "src/components/shared/icon.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shared/icon.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell-icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell-icons.tsx"
+        },
+        {
+          "path": "src/components/shell/app-shell.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/app-shell.tsx"
+        },
+        {
+          "path": "src/components/shell/mockup-shell.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/mockup-shell.tsx"
+        },
+        {
+          "path": "src/components/shell/workspace-icons.tsx",
+          "type": "registry:component",
+          "target": "@components/sarj/shell/workspace-icons.tsx"
+        },
+        {
+          "path": "src/lib/mockups/opportunity-triage-data.ts",
+          "type": "registry:lib",
+          "target": "@lib/sarj/mockups/opportunity-triage-data.ts"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@lib/utils.ts"
+        }
+      ],
+      "cssVars": {
+        "theme": {
+          "color-warning": "var(--warning)",
+          "color-success": "var(--success)",
+          "color-primary-tint": "var(--primary-tint)",
+          "color-primary-tint-foreground": "var(--primary-tint-foreground)",
+          "color-success-tint": "var(--success-tint)",
+          "color-success-tint-foreground": "var(--success-tint-foreground)",
+          "color-warning-tint": "var(--warning-tint)",
+          "color-warning-tint-foreground": "var(--warning-tint-foreground)"
+        },
+        "light": {
+          "warning": "oklch(0.769 0.188 70.08)",
+          "success": "oklch(0.627 0.17 149.2)",
+          "primary-tint": "oklch(0.948 0.019 291.8)",
+          "primary-tint-foreground": "oklch(0.411 0.108 291.8)",
+          "success-tint": "oklch(0.945 0.045 149.2)",
+          "success-tint-foreground": "oklch(0.402 0.098 149.2)",
+          "warning-tint": "oklch(0.955 0.055 70.08)",
+          "warning-tint-foreground": "oklch(0.402 0.086 55)"
+        }
+      },
+      "css": {
+        "@utility z-nav": {
+          "z-index": "var(--z-nav)"
+        },
+        ":root": {
+          "--z-nav": "30"
+        }
+      }
     }
   ]
 }

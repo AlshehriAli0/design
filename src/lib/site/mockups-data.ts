@@ -19,6 +19,7 @@ import {
   ShieldKeyIcon,
   SourceCodeIcon,
   SparklesIcon,
+  TaskDone02Icon,
   TelephoneIcon,
   Timer01Icon,
   UserGroupIcon,
@@ -407,6 +408,17 @@ export const MOCKUPS: Mockup[] = [
     icon: VoiceIdIcon,
     tickets: ["DES-207", "INT-192"],
     added: "2026-11-03T08:42:58.592Z",
+  },
+  {
+    href: "/opportunity-triage",
+    title: "Resolve or dismiss opportunities",
+    meta: "Tab · in progress",
+    surface: "Scenario Edit",
+    description:
+      "On a scenario's Optimization Opportunities tab, resolve or dismiss each opportunity, switch between open, resolved and dismissed, and tell new ones from ones that came back after a decision.",
+    icon: TaskDone02Icon,
+    tickets: ["DES-208", "INT-188"],
+    added: "2026-11-04T03:46:43.852Z",
   },
   // `npm run new` appends new mockups above this line.
 ]
