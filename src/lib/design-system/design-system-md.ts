@@ -52,13 +52,10 @@ function section(id: string): DocsSection {
  * the reader of this file is often someone, or an agent, who cannot sign in to the rest of it.
  */
 function componentLines(id: string, title: string, description: string) {
-  const line = description
-    ? `- **${title}** — ${description}`
-    : `- **${title}**`
-  if (!(id in COMPONENT_ENTRIES)) return [line]
+  if (!(id in COMPONENT_ENTRIES)) return [`- **${title}** — ${description}`]
   const item = componentItem(id)
   return [
-    line,
+    `- **${title}** — ${description}`,
     `  - Source: ${registryUrl(item)}`,
     `  - Install: \`${installCommand(item)}\``,
   ]

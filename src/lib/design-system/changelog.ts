@@ -14,6 +14,21 @@ export type ChangelogEntry = {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    date: "2026-11-05",
+    title: "Buttons are flat shadcn buttons again",
+    changes: [
+      {
+        kind: "removed",
+        text: "The lit button surface — gradient fill, inner edge, ring and drop — is gone. Every variant renders as the stock primitive.",
+      },
+      {
+        kind: "changed",
+        text: "The Buttons topic is back to its sizes and roles tables in place of the specimen sheet.",
+      },
+    ],
+    topics: ["buttons"],
+  },
+  {
     date: "2026-11-04",
     title: "A tab can carry a marker after its name",
     changes: [

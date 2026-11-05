@@ -570,14 +570,12 @@ export function SectionMenu({
                         )}
                       >
                         <header className="flex flex-col gap-1">
-                          {openTopic.bare ? null : (
-                            <TextHighlightWave
-                              as="p"
-                              charStagger={0.02}
-                              className="text-sm leading-normal font-normal tracking-normal text-muted-foreground sm:text-sm"
-                              text={openSection.title}
-                            />
-                          )}
+                          <TextHighlightWave
+                            as="p"
+                            charStagger={0.02}
+                            className="text-sm leading-normal font-normal tracking-normal text-muted-foreground sm:text-sm"
+                            text={openSection.title}
+                          />
                           <TextHighlightWave
                             as="h2"
                             charStagger={0.03}
@@ -585,15 +583,13 @@ export function SectionMenu({
                             delay={0.1}
                             text={openTopic.title}
                           />
-                          {openTopic.description ? (
-                            <TextHighlightWave
-                              as="p"
-                              charStagger={0.006}
-                              className="max-w-2xl text-sm leading-normal font-normal tracking-normal text-muted-foreground sm:text-sm"
-                              delay={0.3}
-                              text={openTopic.description}
-                            />
-                          ) : null}
+                          <TextHighlightWave
+                            as="p"
+                            charStagger={0.006}
+                            className="max-w-2xl text-sm leading-normal font-normal tracking-normal text-muted-foreground sm:text-sm"
+                            delay={0.3}
+                            text={openTopic.description}
+                          />
                         </header>
                         {views[openTopic.id]}
                       </div>

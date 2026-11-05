@@ -699,8 +699,6 @@ export type DocsPage = {
   title: string
   description: string
   sarj?: boolean
-  /** The page header is the title alone — no section label above it. */
-  bare?: boolean
 }
 
 export type DocsGroup = {
@@ -918,9 +916,8 @@ const PATTERN_PAGES: DocsPage[] = [
   {
     id: "buttons",
     title: "Buttons",
-    // Empty on purpose: the page is the grid of buttons and nothing else.
-    description: "",
-    bare: true,
+    description:
+      "Four sizes and four roles. Size is a density decision; the role is the hierarchy one.",
     sarj: true,
   },
   {

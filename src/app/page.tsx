@@ -106,7 +106,8 @@ export default function Home() {
 
                 return (
                   <article
-                    className="site-window window-enter flex flex-col"
+                    className="site-window window-enter relative flex scroll-mt-24 flex-col"
+                    id={`mockup-${slug}`}
                     key={href}
                     style={{ "--i": card } as React.CSSProperties}
                   >

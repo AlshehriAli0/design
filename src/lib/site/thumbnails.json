@@ -17,6 +17,7 @@
     "listener-cues": "87922dfe4c3cd1a7",
     "live-scenarios": "2a5555698e1eaa27",
     "model-catalog": "91e726856b84beb8",
+    "opportunity-triage": "b44f3eecd7ec6893",
     "org-access": "83db378321b943ad",
     "persona-pronunciation": "41079fde444d10fe",
     "personas-depth": "e90ada66b6a8a664",
@@ -29,7 +30,8 @@
     "tool-calls-transcript": "4426beedc471f25c",
     "transfer-routing": "89277f4c8d1ca311",
     "variable-mentions": "3fb4faf2e3f2c22d",
-    "voice-cloning": "adc3fd8e16b5058e"
+    "voice-cloning": "adc3fd8e16b5058e",
+    "voice-ownership": "21f0b0cca3227674"
   },
   "height": 533,
   "width": 1280

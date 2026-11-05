@@ -129,19 +129,15 @@ export function TopicSheet({
                 }}
               >
                 <header className="flex flex-col gap-1">
-                  {found.topic.bare ? null : (
-                    <p className="text-sm text-muted-foreground">
-                      {found.section.title}
-                    </p>
-                  )}
+                  <p className="text-sm text-muted-foreground">
+                    {found.section.title}
+                  </p>
                   <h2 className="text-2xl font-semibold">
                     {found.topic.title}
                   </h2>
-                  {found.topic.description ? (
-                    <p className="max-w-2xl text-sm text-pretty text-muted-foreground">
-                      {found.topic.description}
-                    </p>
-                  ) : null}
+                  <p className="max-w-2xl text-sm text-pretty text-muted-foreground">
+                    {found.topic.description}
+                  </p>
                 </header>
                 {views[found.topic.id]}
               </motion.div>

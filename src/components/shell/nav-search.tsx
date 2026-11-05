@@ -2,11 +2,11 @@
 
 import { motion, useReducedMotion } from "motion/react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import * as React from "react"
 
 import { ClearIcon, SearchIcon } from "@/components/shell/workspace-icons"
-import { Card } from "@/components/ui/card"
+import { Command } from "@/components/ui/command"
 import { Kbd } from "@/components/ui/kbd"
 import {
   InputGroup,
@@ -78,6 +78,7 @@ function useModifierKey() {
 
 export function NavSearch() {
   const router = useRouter()
+  const pathname = usePathname()
   const reduced = useReducedMotion()
   const modifier = useModifierKey()
 
@@ -125,8 +126,46 @@ export function NavSearch() {
     return () => window.removeEventListener("pointerdown", onDown)
   }, [close, open])
 
+  const spotTimer = React.useRef<number | undefined>(undefined)
+
+  // On the index, a mockup hit scrolls to its card and lights it instead of leaving the page.
+  const spotlight = React.useCallback(
+    (slug: string) => {
+      const card = document.getElementById(`mockup-${slug}`)
+      if (!card) return false
+
+      card.scrollIntoView({
+        behavior: reduced ? "auto" : "smooth",
+        block: "center",
+      })
+      // One card lit at a time; a new pick clears the last one and its timer.
+      window.clearTimeout(spotTimer.current)
+      document
+        .querySelectorAll("[data-spotlight]")
+        .forEach((lit) => lit.removeAttribute("data-spotlight"))
+      // Re-adding on the next frame restarts the animation when the same card is picked twice.
+      // The timer starts inside the frame, so a late frame cannot light the card after it was cleared.
+      requestAnimationFrame(() => {
+        card.setAttribute("data-spotlight", "")
+        spotTimer.current = window.setTimeout(
+          () => card.removeAttribute("data-spotlight"),
+          5000,
+        )
+      })
+      return true
+    },
+    [reduced],
+  )
+
   const go = (hit: Hit) => {
     close()
+    if (
+      hit.group === "Mockups" &&
+      pathname === "/" &&
+      spotlight(hit.href.slice(1))
+    ) {
+      return
+    }
     router.push(hit.href)
   }
 
@@ -206,9 +245,10 @@ export function NavSearch() {
       </motion.div>
 
       {open && hits.length ? (
-        <Card
-          className="absolute end-0 top-full z-popover mt-2 w-80 gap-0"
-          size="sm"
+        // Command's surface, not Card's: a menu wants a 4px inset, and Card's padding is fixed.
+        <Command
+          className="absolute end-0 top-full z-popover mt-5 size-auto w-80 ring-1 ring-foreground/10"
+          shouldFilter={false}
         >
           {hits.map((hit, index) => (
             <Link
@@ -231,7 +271,7 @@ export function NavSearch() {
               </span>
             </Link>
           ))}
-        </Card>
+        </Command>
       ) : null}
     </div>
   )
